@@ -1,24 +1,24 @@
 import { useState } from "react";
-import { useQuery } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { addEmployee } from "../api/employees/addEmployee";
 
 export const CreateEmployee = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const queryClient = useQueryClient();
 
-  const {error, status, data, refetch} = useQuery(
-    ["addEmployee", name, email],
-    () => addEmployee(name, email),
-    {
-      enabled: false,
-      retry: false
+  const {mutate} = useMutation(() => addEmployee(name, email), {
+    onSuccess: () => {
+      queryClient.invalidateQueries("employees");
     }
-  );
+  });
 
   const onClick = () => {
     if(name && email){
-      refetch();
+      mutate();
+      setName("");
+      setEmail("");
     }
   }
 
