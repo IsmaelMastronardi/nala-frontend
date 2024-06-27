@@ -3,6 +3,7 @@ import { EmployeesList } from "./employees/employeesList";
 import ProtectedRoute from "./protectedRoute";
 import { Login } from "./sessions/login";
 import { Signup } from "./sessions/signup";
+import { Home } from "./home";
 
 const getAccessToken = () => {
     return sessionStorage.getItem('auth_token');
@@ -28,7 +29,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <EmployeesList />
+        element: <Home />
       },
     ]
   },
