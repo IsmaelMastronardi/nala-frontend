@@ -1,6 +1,7 @@
 import { useQuery } from "react-query";
 import { signup } from "../api";
 import { useState } from "react";
+import { Navigate } from "react-router-dom";
 
 
 export const Signup = () => {
@@ -21,6 +22,10 @@ export const Signup = () => {
       refetch();
     }
   };
+
+  if(status === 'success'){
+    return <Navigate to="/" replace />;
+  }
 
   return(
     <div>
