@@ -5,7 +5,6 @@ import { Login } from "./sessions/login";
 import { Signup } from "./sessions/signup";
 
 const getAccessToken = () => {
-  console.log('GET ACCESS TOKEN', sessionStorage.getItem('auth_token'));
     return sessionStorage.getItem('auth_token');
 };
 
