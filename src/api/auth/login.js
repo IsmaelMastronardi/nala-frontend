@@ -11,8 +11,6 @@ export const login = async (email, password) => {
   if(response.ok){
     const token = response.headers.get('Authorization');
     sessionStorage.setItem('auth_token', token);
-    console.log('TOKEN', token);
-    console.log('SESSION', sessionStorage.getItem('auth_token'));
   }
 
   if (!response.ok) {
