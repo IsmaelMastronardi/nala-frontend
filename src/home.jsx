@@ -1,4 +1,4 @@
-import { EmployeesList } from "./employees/employeesList";
+import { Employees } from "./employees/employees";
 
 export const Home = () => {
   return(
@@ -9,7 +9,7 @@ export const Home = () => {
         <a href="/login">Login</a>
         <a href="/signup">Signup</a>
       </div>
-      <EmployeesList />
+      <Employees />
     </div>
   )
 };
