@@ -5,7 +5,8 @@ import { Login } from "./sessions/login";
 import { Signup } from "./sessions/signup";
 
 const getAccessToken = () => {
-    return localStorage.getItem('accessToken');
+  console.log('GET ACCESS TOKEN', sessionStorage.getItem('auth_token'));
+    return sessionStorage.getItem('auth_token');
 };
 
 const isAuthenticated = () => {
@@ -13,11 +14,6 @@ const isAuthenticated = () => {
 };
 
 export const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Login />,
-    index: true
-  },
   {
     path: "/login",
     element: <Login />,
@@ -32,7 +28,7 @@ export const router = createBrowserRouter([
     element: <ProtectedRoute isAuthenticated={isAuthenticated()} />,
     children: [
       {
-        path: "/employees",
+        path: "/",
         element: <EmployeesList />
       },
     ]
