@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-import { EmployeesList } from "./employees/employeesList";
 import ProtectedRoute from "./protectedRoute";
 import { Login } from "./sessions/login";
 import { Signup } from "./sessions/signup";
