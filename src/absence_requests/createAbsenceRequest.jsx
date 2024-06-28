@@ -63,7 +63,7 @@ export const CreateAbsenceRequest = ({id}) => {
         >
           <option value="" disabled>Select Absence Type</option>
           <option value="vacation">Vacation</option>
-          <option value="incapability">incapabilityf</option>
+          <option value="incapability">incapability</option>
         </select>
         <select
           value={requestStatus}
