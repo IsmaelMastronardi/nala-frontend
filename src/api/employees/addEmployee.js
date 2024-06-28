@@ -1,3 +1,5 @@
+import { NotificationManager } from "react-notifications";
+
 const token = sessionStorage.getItem('auth_token');
 
 export const addEmployee = async (name, email) => {
@@ -11,10 +13,14 @@ export const addEmployee = async (name, email) => {
     },
     body: JSON.stringify({name, email})
   });
-
+  if(response.ok){
+    NotificationManager.success('Employee added successfully');
+    return response.json();
+  }
   if (!response.ok) {
+    const error = await response.json();
+    NotificationManager.error(`Email ${error.email[0]}`);
     throw new Error('Network response was not ok');
   }
 
-  return response.json();
 };

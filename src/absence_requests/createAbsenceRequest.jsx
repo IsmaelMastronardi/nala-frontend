@@ -27,7 +27,12 @@ export const CreateAbsenceRequest = ({id}) => {
     }
   });
 
-  const onClick = () => {
+  const onClick = () => {    
+    // if (new Date(startDate) > new Date(endDate)) {
+    //   setErrorMessage("Start date cannot be after end date.");
+    //   return;
+    // }
+
     if(id && startDate && endDate && requestType && requestStatus){
       mutate();
       setMenuOpen(false);

@@ -30,7 +30,6 @@ export const Login = () => {
   return(
     <div>
     <p>Login</p>
-    {error && <p>Error: {error.message}</p>}
     <button onClick={() => onClick()}>LOGIN BUTTON</button>
     <input
         type="email"
