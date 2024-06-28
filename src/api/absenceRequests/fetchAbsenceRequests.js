@@ -1,6 +1,5 @@
-const token = sessionStorage.getItem('auth_token');
-
 export const fetchAbsenceRequsts = async (page, id, status, start_date, end_date, request_type) => {
+  const token = sessionStorage.getItem('auth_token');
   let employee = ''
   if(id){
     employee = `employees/${id}/`
