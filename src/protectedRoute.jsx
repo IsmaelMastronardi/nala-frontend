@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 
-const ProtectedRoute = ({ isAuthenticated }) => {
-  if (!isAuthenticated) {
+const ProtectedRoute = () => {
+  if (!sessionStorage.getItem('auth_token')) {
     return <Navigate to="/login" replace />;
   }
 

@@ -4,6 +4,7 @@ import { fetchEmployees } from "../api/employees/fetchEmployees";
 import { EmployeeItem } from "./employeeItem";
 import { CreateEmployee } from "./createEmployee";
 import { RemoveEmployee } from "./removeEmployee";
+import { EmployeesFilters } from "./employeesFilters";
 
 export const Employees = () => {
   const [nameFilter, setNameFilter] = useState("");
@@ -20,18 +21,13 @@ export const Employees = () => {
     <div>
       <h1>Employees</h1>
       <CreateEmployee />
+      <h2>Filters</h2>
       <div>
-      <input
-        type="text"
-        value={nameFilter}
-        onChange={(e) => setNameFilter(e.target.value)}
-        placeholder="Filter by name"
-      />
-      <input
-        type="text"
-        value={emailFilter}
-        onChange={(e) => setEmailFilter(e.target.value)}
-        placeholder="Filter by email"
+      <EmployeesFilters
+        nameFilter={nameFilter}
+        emailFilter={emailFilter}
+        setNameFilter={setNameFilter}
+        setEmailFilter={setEmailFilter} 
       />
       </div>
       {status === 'loading' && <div>Loading...</div>}

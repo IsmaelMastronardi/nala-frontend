@@ -17,9 +17,6 @@ export const AbsenceRequestList = ({id}) => {
     {retry: false}
   );
 
-  if(status === "success"){console.log('SUCCESS',data)}
-  if(status === "error"){console.log('ERROR',error)}
-
   return (
     <div>
       <h4>Absence Requests</h4>

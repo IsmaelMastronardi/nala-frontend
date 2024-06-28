@@ -1,14 +1,16 @@
 import { useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { addAbsenceRequest } from "../api/absenceRequests/addAbsenceRequest";
+import { EmployeesFilters } from "../employees/employeesFilters";
+import { fetchEmployees } from "../api/employees/fetchEmployees";
 
-export const AddAbsenceRequest = ({id}) => {
+export const CreateAbsenceRequest = ({id}) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [requestType, setRequestType] = useState("");
   const [reason, setReason] = useState("");
-  const [status, setStatus] = useState("");
+  const [requestStatus, setStatus] = useState("");
 
   const queryClient = useQueryClient();
 
@@ -18,7 +20,7 @@ export const AddAbsenceRequest = ({id}) => {
     endDate,
     requestType,
     reason,
-    status
+    requestStatus
   ), {
     onSuccess: () => {
       queryClient.invalidateQueries("fetchAbsenceRequests");
@@ -26,7 +28,7 @@ export const AddAbsenceRequest = ({id}) => {
   });
 
   const onClick = () => {
-    if(id && startDate && endDate && requestType && status){
+    if(id && startDate && endDate && requestType && requestStatus){
       mutate();
       setMenuOpen(false);
       setStartDate("");
@@ -39,7 +41,7 @@ export const AddAbsenceRequest = ({id}) => {
 
   return(
     <>
-    <button onClick={() => {setMenuOpen(!menuOpen)}}>Create Absence Request</button>
+    <button onClick={() => {setMenuOpen(!menuOpen)}}>{menuOpen ? "Cancel" : "Create Request"}</button>
     {menuOpen && (
         <div>
           <input
@@ -61,10 +63,10 @@ export const AddAbsenceRequest = ({id}) => {
         >
           <option value="" disabled>Select Absence Type</option>
           <option value="vacation">Vacation</option>
-          <option value="sickness">Inability</option>
+          <option value="incapability">incapabilityf</option>
         </select>
         <select
-          value={status}
+          value={requestStatus}
           onChange={(e) => setStatus(e.target.value)}
           placeholder="Request Status"
         >

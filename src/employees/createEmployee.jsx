@@ -24,7 +24,7 @@ export const CreateEmployee = () => {
 
   return(
     <>
-      <button onClick={() => {setMenuOpen(!menuOpen)}}>Create Employee</button>
+      <button onClick={() => {setMenuOpen(!menuOpen)}}>{menuOpen ? "Cancel" : "Create Employee"}</button>
       {menuOpen && (
         <div>
           <input
