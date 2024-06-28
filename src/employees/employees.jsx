@@ -21,10 +21,6 @@ export const Employees = () => {
     setPage(newPage);
   };
 
-  if(status === 'success'){
-    console.log(data.pagy)
-  }
-
   return(
     <div>
       <h1>Employees</h1>
