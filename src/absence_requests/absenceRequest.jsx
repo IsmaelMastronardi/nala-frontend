@@ -1,4 +1,4 @@
-export const AbsenceRequest = ({id, start_date, end_date, status}) => {
+export const AbsenceRequest = ({id, start_date, end_date, request_type, reason, status}) => {
   return (
     <div>
       <p>{id}</p>
