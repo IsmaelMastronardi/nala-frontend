@@ -4,14 +4,6 @@ import { Login } from "./sessions/login";
 import { Signup } from "./sessions/signup";
 import { Home } from "./home";
 
-const getAccessToken = () => {
-    return sessionStorage.getItem('auth_token');
-};
-
-const isAuthenticated = () => {
-    return !!getAccessToken();
-};
-
 export const router = createBrowserRouter([
   {
     path: "/login",
@@ -24,7 +16,7 @@ export const router = createBrowserRouter([
     index: true
   },
   {
-    element: <ProtectedRoute isAuthenticated={isAuthenticated()} />,
+    element: <ProtectedRoute />,
     children: [
       {
         path: "/",
@@ -36,4 +28,4 @@ export const router = createBrowserRouter([
     path: "*",
     element: <p>404 Error - Nothing here...</p>
   }
-])
+]);
