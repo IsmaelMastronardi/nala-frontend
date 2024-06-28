@@ -9,7 +9,6 @@ export const EmployeeItem = ({name, email, id}) => {
     <div>
       <h2>{name}</h2>
       <p>{email}</p>
-      <p>{id}</p>
       <button onClick={() => {setDisplayOpen(!displayOpen)}}>{displayOpen ? "Hide Requests" : "Show Requests"}</button>
       <CreateAbsenceRequest id={id} />
       <RemoveEmployee id={id} />
