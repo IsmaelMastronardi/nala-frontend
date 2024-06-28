@@ -1,3 +1,5 @@
+import { NotificationManager } from "react-notifications";
+
 const token = sessionStorage.getItem('auth_token');
 
 export const removeEmployee = async (id) => {
@@ -11,9 +13,13 @@ export const removeEmployee = async (id) => {
     }
   });
 
-  if (!response.ok) {
-    throw new Error('Network response was not ok');
+  if(response.ok){
+    NotificationManager.success('Employee removed successfully');
+    return response.json();
   }
 
-  return response.json();
+  if (!response.ok) {
+    NotificationManager.error('Failed to remove employee');
+    throw new Error('Network response was not ok');
+  }
 };

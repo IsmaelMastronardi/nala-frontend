@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { addAbsenceRequest } from "../api/absenceRequests/addAbsenceRequest";
 import { EmployeesFilters } from "../employees/employeesFilters";
 import { fetchEmployees } from "../api/employees/fetchEmployees";
+import { NotificationManager } from "react-notifications";
 
 export const CreateAbsenceRequest = ({id}) => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -27,8 +28,13 @@ export const CreateAbsenceRequest = ({id}) => {
     }
   });
 
-  const onClick = () => {
-    if(id && startDate && endDate && requestType && requestStatus){
+  const onClick = () => {    
+    if (new Date(startDate) >= new Date(endDate)) {
+      NotificationManager.error('End date must be after start date');
+      return;
+    }
+
+    else if(id && startDate && endDate && requestType && requestStatus){
       mutate();
       setMenuOpen(false);
       setStartDate("");

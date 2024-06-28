@@ -1,3 +1,5 @@
+import { NotificationManager } from "react-notifications";
+
 const token = sessionStorage.getItem('auth_token');
 
 export const removeAbsenceRequest = async (id) => {
@@ -11,9 +13,12 @@ export const removeAbsenceRequest = async (id) => {
     }
   });
 
+  if(response.ok){
+    NotificationManager.success('Absence request removed successfully');
+    return response.json();
+  }
+
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }
-
-  return response.json();
 };
