@@ -1,6 +1,5 @@
-const token = sessionStorage.getItem('auth_token');
-
 export const fetchEmployees = async (page, nameFilter, emailFilter) => {
+  const token = sessionStorage.getItem('auth_token');
   const url = new URL(`http://localhost:3001/employees?page=${page}&name=${nameFilter}&email=${emailFilter}`);
 
   const response = await fetch(url, {

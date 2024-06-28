@@ -12,7 +12,6 @@ export const login = async (email, password) => {
     const token = response.headers.get('Authorization');
     sessionStorage.setItem('auth_token', token);
   }
-
   if (!response.ok) {
     const errorResponse = await response.json();
     throw new Error(errorResponse.message);

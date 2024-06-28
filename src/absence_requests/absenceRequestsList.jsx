@@ -2,6 +2,7 @@ import { useQuery } from "react-query";
 import { AbsenceRequest } from "./absenceRequest";
 import { useState } from "react";
 import { fetchAbsenceRequsts } from "../api/absenceRequests/fetchAbsenceRequests";
+import { Pagination } from "../pagination";
 
 export const AbsenceRequestList = ({id}) => {
   const [page, setPage] = useState(1);
@@ -10,7 +11,10 @@ export const AbsenceRequestList = ({id}) => {
   const [endDateFilter, setEndDateFilter] = useState("");
   const [typeFilter, setTypeFilter] = useState("");
 
-  
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
+  };
+
   const {status, error, data} = useQuery(
     ["fetchAbsenceRequests",id, page],
     () => fetchAbsenceRequsts( page, id, statusFilter, startDateFilter, endDateFilter, typeFilter),
@@ -23,11 +27,18 @@ export const AbsenceRequestList = ({id}) => {
       {status === "loading" && <p>Loading...</p>}
       {status === "error" && <p>Error: {error.message}</p>}
       {status === "success" &&(
-        <ul>
-        {data.absence_requests.map((request) => (
-          <AbsenceRequest key={request.id} {...request} />
-        ))}
-      </ul>
+        <>
+          <Pagination
+          currentPage={data.pagy.current_page}
+          totalPages={data.pagy.pages}
+          handlePageChange={handlePageChange}
+          />
+          <ul>
+            {data.absence_requests.map((request) => (
+              <AbsenceRequest key={request.id} {...request} />
+            ))}
+          </ul>
+        </>
       )}
     </div>
   )

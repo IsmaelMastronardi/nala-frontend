@@ -3,8 +3,8 @@ import { useState } from "react";
 import { fetchEmployees } from "../api/employees/fetchEmployees";
 import { EmployeeItem } from "./employeeItem";
 import { CreateEmployee } from "./createEmployee";
-import { RemoveEmployee } from "./removeEmployee";
 import { EmployeesFilters } from "./employeesFilters";
+import { Pagination } from "../pagination";
 
 export const Employees = () => {
   const [nameFilter, setNameFilter] = useState("");
@@ -16,6 +16,14 @@ export const Employees = () => {
     () => fetchEmployees(page, nameFilter, emailFilter),
     {retry: false}
   );
+
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
+  };
+
+  if(status === 'success'){
+    console.log(data.pagy)
+  }
 
   return(
     <div>
@@ -33,11 +41,17 @@ export const Employees = () => {
       {status === 'loading' && <div>Loading...</div>}
       {status === 'error' && <div>Error: {error.message}</div>}
       {status === 'success' && (
-        <ul>
+        <>
+          <Pagination 
+          currentPage={data.pagy.current_page}
+          totalPages={data.pagy.pages}
+          handlePageChange={handlePageChange} />
+          <ul>
           {data.employees.map((employee) => (
             <EmployeeItem key={employee.id} {...employee} />
           ))}
         </ul>
+        </>
       )}
     </div>
   )
