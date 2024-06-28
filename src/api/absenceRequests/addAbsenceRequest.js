@@ -1,3 +1,5 @@
+import { NotificationManager } from "react-notifications";
+
 const token = sessionStorage.getItem('auth_token');
 
 export const addAbsenceRequest = async (id, startDate, endDate, requestType, reason, status) => {
@@ -18,9 +20,13 @@ export const addAbsenceRequest = async (id, startDate, endDate, requestType, rea
     })
   });
 
-  if (!response.ok) {
-    throw new Error('Network response was not ok');
+  if(response.ok){
+    NotificationManager.success('Absence request added successfully');
+    return response.json();
   }
 
-  return response.json();
+  if (!response.ok) {
+    NotificationManager.error('Network response was not ok');
+    throw new Error('Network response was not ok');
+  }
 };
