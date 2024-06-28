@@ -42,7 +42,10 @@ export const Employees = () => {
       {status === 'error' && <div>Error: {error.message}</div>}
       {status === 'success' && (
         <>
-          <Pagination  currentPage={data.pagy.current_page} totalPages={data.pagy.pages} handlePageChange={handlePageChange} />
+          <Pagination 
+          currentPage={data.pagy.current_page}
+          totalPages={data.pagy.pages}
+          handlePageChange={handlePageChange} />
           <ul>
           {data.employees.map((employee) => (
             <EmployeeItem key={employee.id} {...employee} />
