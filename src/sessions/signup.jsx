@@ -1,11 +1,9 @@
 import { useQuery } from "react-query";
-
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import { RegistrationDiv } from "../styled_components/registration";
 import { Button, Link, TextField, Typography } from "@mui/material";
 import { signup } from "../api/auth/signup";
-
 
 export const Signup = () => {
   const [email, setEmail] = useState("");
