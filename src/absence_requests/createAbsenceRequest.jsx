@@ -26,6 +26,7 @@ export const CreateAbsenceRequest = ({id}) => {
   ), {
     onSuccess: () => {
       queryClient.invalidateQueries("absence_requests");
+      queryClient.invalidateQueries("employees");
     }
   });
 
@@ -66,7 +67,7 @@ export const CreateAbsenceRequest = ({id}) => {
               >
               <MenuItem value="" disabled>Select Request Status</MenuItem>
               <MenuItem value="accepted">Accepted</MenuItem>
-              <MenuItem value="denied">Denied</MenuItem>
+              <MenuItem value="rejected">Denied</MenuItem>
             </Select>
           </FormControl>
           <FormControl fullWidth variant="outlined" margin="normal">

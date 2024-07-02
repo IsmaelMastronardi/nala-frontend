@@ -40,7 +40,7 @@ export const EditAbsenceRequest = ({toggleEditMenu, id, start_date, end_date, re
           >
           <MenuItem value="" disabled>Select Request Status</MenuItem>
           <MenuItem value="accepted">Accepted</MenuItem>
-          <MenuItem value="denied">Denied</MenuItem>
+          <MenuItem value="rejected">Denied</MenuItem>
         </Select>
       </FormControl>
       <FormControl fullWidth variant="outlined" margin="normal">

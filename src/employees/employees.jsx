@@ -6,7 +6,7 @@ import { CreateEmployee } from "./createEmployee";
 import { EmployeesFilters } from "./employeesFilters";
 import { Pagination } from "../pagination";
 import { CardList } from "../styled_components/lists";
-import { ContentDiv, FilterDiv, PaginationDiv } from "../styled_components/divs";
+import { ContentDiv, PaginationDiv } from "../styled_components/divs";
 
 export const Employees = () => {
   const [nameFilter, setNameFilter] = useState("");
