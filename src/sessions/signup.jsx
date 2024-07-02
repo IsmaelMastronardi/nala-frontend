@@ -2,6 +2,8 @@ import { useQuery } from "react-query";
 import { signup } from "../api";
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
+import { RegistrationDiv } from "../styled_components/registration";
+import { Button, Link, TextField, Typography } from "@mui/material";
 
 
 export const Signup = () => {
@@ -28,22 +30,31 @@ export const Signup = () => {
   }
 
   return(
-    <div>
-    <p>Signup</p>
-    <button onClick={() => onClick()}>SIGNUP BUTTON</button>
-    <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Enter your email"
-      />
-      <input
+    <RegistrationDiv>
+      <Typography variant="h4">Signup</Typography>
+      <TextField
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Enter your email"
+        />
+      <TextField
         type="pasword"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         placeholder="Enter your password"
       />
-    <a href="/login">Login</a>
-  </div>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => onClick()}>
+        SIGNUP BUTTON
+      </Button>
+      <Link
+        href="/login"
+        underline="hover"
+        style={{ marginTop: '16px', display: 'block' }}
+      >Login</Link>
+  </RegistrationDiv>
   )
 };

@@ -5,6 +5,8 @@ import { EmployeeItem } from "./employeeItem";
 import { CreateEmployee } from "./createEmployee";
 import { EmployeesFilters } from "./employeesFilters";
 import { Pagination } from "../pagination";
+import { CardList } from "../styled_components/lists";
+import { ContentDiv, FilterDiv, PaginationDiv } from "../styled_components/divs";
 
 export const Employees = () => {
   const [nameFilter, setNameFilter] = useState("");
@@ -22,33 +24,35 @@ export const Employees = () => {
   };
 
   return(
-    <div>
+    <ContentDiv>
       <h1>Employees</h1>
-      <CreateEmployee />
-      <h2>Filters</h2>
       <div>
+        <CreateEmployee />
+      </div>
+      <h2>Filters</h2>
       <EmployeesFilters
         nameFilter={nameFilter}
         emailFilter={emailFilter}
         setNameFilter={setNameFilter}
         setEmailFilter={setEmailFilter} 
       />
-      </div>
       {status === 'loading' && <div>Loading...</div>}
       {status === 'error' && <div>Error: {error.message}</div>}
       {status === 'success' && (
         <>
+        <PaginationDiv>
           <Pagination 
-          currentPage={data.pagy.current_page}
-          totalPages={data.pagy.pages}
-          handlePageChange={handlePageChange} />
-          <ul>
-          {data.employees.map((employee) => (
-            <EmployeeItem key={employee.id} {...employee} />
-          ))}
-        </ul>
+            currentPage={data.pagy.current_page}
+            totalPages={data.pagy.pages}
+            handlePageChange={handlePageChange} />
+        </PaginationDiv>
+          <CardList>
+            {data.employees.map((employee) => (
+              <EmployeeItem key={employee.id} {...employee} />
+            ))}
+          </CardList>
         </>
       )}
-    </div>
+    </ContentDiv>
   )
 };

@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "react-query";
 import { removeEmployee } from "../api/employees/removeEmployee";
+import { Button } from "@mui/material";
 
 export const RemoveEmployee = ({id}) => {
   const queryClient = useQueryClient();
@@ -16,7 +17,12 @@ export const RemoveEmployee = ({id}) => {
 
   return(
     <>
-      <button onClick={() => {onClick()}}>Remove Employee</button>
+      <Button
+        variant="outlined"
+        color="error"
+        onClick={() => {onClick()}}>
+          Remove Employee
+      </Button>
     </>
   )
 };
