@@ -1,7 +1,8 @@
 import { NotificationManager } from "react-notifications";
+import { baseUrl } from "../apiUrl";
 
 export const login = async (email, password) => {
-  const url = new URL("http://localhost:3001/login");
+  const url = baseUrl + 'login';
 
   const response = await fetch(url,{
     method: 'POST',

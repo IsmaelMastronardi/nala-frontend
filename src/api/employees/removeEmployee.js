@@ -1,9 +1,9 @@
 import { NotificationManager } from "react-notifications";
-
-const token = sessionStorage.getItem('auth_token');
+import { baseUrl } from "../apiUrl";
 
 export const removeEmployee = async (id) => {
-  const url = new URL(`http://localhost:3001/employees/${id}`);
+  const token = sessionStorage.getItem('auth_token');
+  const url = baseUrl + `employees/${id}`;
 
   const response = await fetch(url, {
     method: 'DELETE',

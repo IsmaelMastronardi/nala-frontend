@@ -3,7 +3,7 @@ import { useState } from "react";
 import { login } from "../api/auth/login";
 import { Navigate } from "react-router-dom";
 import { RegistrationDiv } from "../styled_components/registration";
-import { Autocomplete, Button, Link, TextField, Typography } from "@mui/material";
+import { Button, Link, TextField, Typography } from "@mui/material";
 
 
 export const Login = () => {

@@ -26,6 +26,10 @@ export const AbsenceRequests = () => {
     {retry: false}
   );
 
+  if(status === 'success'){
+    console.log(data)
+  }
+
   return(
     <div>
       <h1>Absence Requests</h1>
