@@ -5,13 +5,46 @@ import { RemoveAbsenceRequest } from "./removeAbsenceRequest";
 import { useState } from "react";
 import { ButtonPair } from "../styled_components/buttons";
 
-export const AbsenceRequest = ({id, start_date, end_date, request_type, reason, status}) => {
+export const AbsenceRequest = (
+  {
+  id,
+  start_date,
+  end_date,
+  request_type,
+  reason,
+  status,
+  employee_name,
+  employee_email,
+  days_requested
+}
+) => {
   const [editMenuOpen, setEditMenuOpen] = useState(false);
   const toggleEditMenu = () => {
     setEditMenuOpen(!editMenuOpen);
   }
   return (
     <RequestItem>
+      <Typography
+      variant="h5"
+      component="h2"
+      gutterBottom
+      >
+        Employee Name: {employee_name}
+      </Typography>
+      <Typography
+      variant="h5"
+      component="h2"
+      gutterBottom
+      >
+        Employee Email: {employee_name}
+      </Typography>
+      <Typography
+        variant="h6"
+        component='h2'
+        gutterBottom 
+      >
+        Days requested: {days_requested}
+      </Typography>
       <Typography
         variant="h6"
         component="h2"
