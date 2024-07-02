@@ -1,8 +1,9 @@
 import { NotificationManager } from "react-notifications";
+import { baseUrl } from "../apiUrl";
 
 export const editAbsenceRequest = async (id, startDate, endDate, requestType, reason, status) => {
   const token = sessionStorage.getItem('auth_token');
-  const url = new URL(`http://localhost:3001/absence_requests/${id}`);
+  const url = baseUrl + `employees/${id}/absence_requests`;
 
   const response = await fetch(url, {
     method: 'PATCH',
