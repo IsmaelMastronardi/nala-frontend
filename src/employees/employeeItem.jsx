@@ -2,17 +2,28 @@ import { useState } from "react";
 import { AbsenceRequestList } from "../absence_requests/absenceRequestsList";
 import { CreateAbsenceRequest } from "../absence_requests/createAbsenceRequest";
 import { RemoveEmployee } from "./removeEmployee";
+import { Button } from "@mui/material";
+import { CardItem } from "../styled_components/lists";
 
 export const EmployeeItem = ({name, email, id}) => {
   const [displayOpen, setDisplayOpen] = useState(false);
   return (
-    <div>
+    <CardItem>
       <h2>{name}</h2>
       <p>{email}</p>
-      <button onClick={() => {setDisplayOpen(!displayOpen)}}>{displayOpen ? "Hide Requests" : "Show Requests"}</button>
-      <CreateAbsenceRequest id={id} />
-      <RemoveEmployee id={id} />
+      <div>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => {setDisplayOpen(!displayOpen)}}>
+          {displayOpen ? "Hide Requests" : "Show Requests"}
+        </Button>
+      </div>
+      <div className="">
+        <RemoveEmployee id={id} />
+        <CreateAbsenceRequest id={id} />
+      </div>
       {displayOpen && <AbsenceRequestList id={id} />}
-    </div>
+    </CardItem>
   )
 };

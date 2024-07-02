@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "react-query";
 import { removeAbsenceRequest } from "../api/absenceRequests/removeAbsenceRequest";
+import { Button } from "@mui/material";
 
 export const RemoveAbsenceRequest = ({id}) => {
   const queryClient = useQueryClient();
@@ -16,7 +17,12 @@ export const RemoveAbsenceRequest = ({id}) => {
 
   return(
     <>
-      <button onClick={() => {onClick()}}>Remove Absence Requests</button>
+      <Button
+        variant="contained"
+        color="error"
+        onClick={() => {onClick()}}>
+        Remove
+      </Button>
     </>
   )
 };

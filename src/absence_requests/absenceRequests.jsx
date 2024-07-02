@@ -3,6 +3,11 @@ import { useQuery } from "react-query";
 import { fetchAbsenceRequsts } from "../api/absenceRequests/fetchAbsenceRequests";
 import { AbsenceRequest } from "./absenceRequest";
 import { Pagination } from "../pagination";
+import { FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import dayjs from "dayjs";
+import { ButtonPair } from "../styled_components/buttons";
 
 export const AbsenceRequests = () => {
   const [statusFilter, setStatusFilter] = useState("");
@@ -16,72 +21,70 @@ export const AbsenceRequests = () => {
   };
 
   const {status, error, data} = useQuery(
-    ["fetchAbsenceRequests",page, statusFilter, startDateFilter, endDateFilter, typeFilter],
+    ["absence_requests",page, statusFilter, startDateFilter, endDateFilter, typeFilter],
     () => fetchAbsenceRequsts(page, null , statusFilter, startDateFilter, endDateFilter, typeFilter),
     {retry: false}
   );
-
-  if(status === 'loading'){
-    console.log('Loading...')
-  }
-  if(status === 'error'){
-    console.log('Error: ', error.message)
-  }
-  if(status === 'success'){
-    console.log('Data: ', data)
-  }
 
   return(
     <div>
       <h1>Absence Requests</h1>
       <h2>Filters</h2>
       <div>
-        <select
+        <FormControl fullWidth variant="outlined" margin="normal">
+          <InputLabel id="status-filter-label">Select Request Status</InputLabel>
+          <Select
+            variant="standard"
+            labelId="status-filter-label"
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            placeholder="Status"
-          >
-            <option value="" disabled>Select Request Status</option>
-            <option value="">All</option>
-            <option value="accepted">Accepted</option>
-            <option value="denied">Denied</option>
-          </select>
-          <select
+            >
+            <MenuItem value="" disabled>Select Request Status</MenuItem>
+            <MenuItem value="">All</MenuItem>
+            <MenuItem value="accepted">Accepted</MenuItem>
+            <MenuItem value="denied">Denied</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl fullWidth variant="outlined" margin="normal">
+          <InputLabel id="type-filter-label">Select Type Status</InputLabel>
+          <Select
+            variant="standard"
+            labelId="type-filter-label"
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
-            placeholder="Type"
           >
-            <option value="" disabled>Select Absence Type</option>
-            <option value="">All</option>
-            <option value="vacation">Vacation</option>
-            <option value="incapability">incapability</option>
-          </select>
-          <input
-            type="date"
-            value={startDateFilter}
-            onChange={(e) => setStartDateFilter(e.target.value)}
-            placeholder="Start Date"
+            <MenuItem value="" disabled>Select Absence Type</MenuItem>
+            <MenuItem value="">All</MenuItem>
+            <MenuItem value="vacation">Vacation</MenuItem>
+            <MenuItem value="incapability">incapability</MenuItem>
+          </Select>
+        </FormControl>
+        <ButtonPair>
+        <DatePicker
+            label="Start Date"
+            onChange={(e) => setStartDateFilter(dayjs(e).format('YYYY/MM/DD'))}
+            renderInput={(params) => <TextField {...params} fullWidth margin="normal" />}
           />
-          <input
-            type="date"
-            value={endDateFilter}
-            onChange={(e) => setEndDateFilter(e.target.value)}
-            placeholder="End Date"
+          <DatePicker
+            label="End Date"
+            onChange={(e) => setEndDateFilter(dayjs(e).format('YYYY/MM/DD'))}
+            renderInput={(params) => <TextField {...params} fullWidth margin="normal" />}
           />
+        </ButtonPair>
       </div>
       {status === 'loading' && <div>Loading...</div>}
       {status === 'error' && <div>Error: {error.message}</div>}
       {status === 'success' && (
         <>
-          <Pagination 
-          currentPage={data.pagy.current_page}
-          totalPages={data.pagy.pages}
-          handlePageChange={handlePageChange} />
           <ul>
             {data.absence_requests.map((request) => (
               <AbsenceRequest key={request.id} {...request} />
             ))}
           </ul>
+          <Pagination 
+          currentPage={data.pagy.current_page}
+          totalPages={data.pagy.pages}
+          handlePageChange={handlePageChange} />
         </>
       )}
     </div>

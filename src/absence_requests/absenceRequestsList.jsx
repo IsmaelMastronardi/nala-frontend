@@ -3,6 +3,8 @@ import { AbsenceRequest } from "./absenceRequest";
 import { useState } from "react";
 import { fetchAbsenceRequsts } from "../api/absenceRequests/fetchAbsenceRequests";
 import { Pagination } from "../pagination";
+import { CircularProgress } from "@mui/material";
+import { RequestList } from "../styled_components/lists";
 
 export const AbsenceRequestList = ({id}) => {
   const [page, setPage] = useState(1);
@@ -16,28 +18,38 @@ export const AbsenceRequestList = ({id}) => {
   };
 
   const {status, error, data} = useQuery(
-    ["fetchAbsenceRequests",id, page],
+    ["absence_requests",id, page],
     () => fetchAbsenceRequsts( page, id, statusFilter, startDateFilter, endDateFilter, typeFilter),
     {retry: false}
   );
 
+  if (status === "loading") {
+    return <CircularProgress />;
+  }
+
+  if (status === "error") {
+    return <p>Error: {error.message}</p>;
+  }
+
+  if(data.absence_requests.length === 0){
+    return <p>No absence requests found</p>
+  }
+
   return (
     <div>
       <h4>Absence Requests</h4>
-      {status === "loading" && <p>Loading...</p>}
-      {status === "error" && <p>Error: {error.message}</p>}
-      {status === "success" &&(
+      {status === "success" &&(    
         <>
+          <RequestList>
+            {data.absence_requests.map((request) => (
+              <AbsenceRequest key={request.id} {...request} />
+            ))}
+          </RequestList>
           <Pagination
           currentPage={data.pagy.current_page}
           totalPages={data.pagy.pages}
           handlePageChange={handlePageChange}
           />
-          <ul>
-            {data.absence_requests.map((request) => (
-              <AbsenceRequest key={request.id} {...request} />
-            ))}
-          </ul>
         </>
       )}
     </div>
