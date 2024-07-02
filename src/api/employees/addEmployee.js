@@ -1,9 +1,8 @@
 import { NotificationManager } from "react-notifications";
 import { baseUrl } from "../apiUrl";
 
-const token = sessionStorage.getItem('auth_token');
-
 export const addEmployee = async (name, email) => {
+  const token = sessionStorage.getItem('auth_token');
   const url = baseUrl + '/employees';
 
   const response = await fetch(url, {

@@ -1,9 +1,8 @@
 import { NotificationManager } from "react-notifications";
 import { baseUrl } from "../apiUrl";
 
-const token = sessionStorage.getItem('auth_token');
-
 export const removeAbsenceRequest = async (id) => {
+  const token = sessionStorage.getItem('auth_token');
   const url = baseUrl + `absence_requests/${id}`;
 
   const response = await fetch(url, {
